@@ -1,44 +1,60 @@
 import React from 'react';
-import Modal from 'react-bootstrap-modal';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Input} from 'reactstrap';
+import {ShowRecipes} from './ShowRecipes';
 
 export class AddRecipe extends React.Component {
     constructor(){
         super();
         this.state = {
+            updated: [],
             show: false
         }
-        this.closeModal = this.closeModal.bind(this);
-        this.showModal = this.showModal.bind(this);
+        this.toggle = this.toggle.bind(this);
+        this.addInstructions = this.addInstructions.bind(this);
     }
-    showModal(){
+
+    componentDidMount(){
         this.setState({
-            show: true
+            updated: this.props.recipes
         });
     }
-    closeModal(){
+
+    toggle() {
         this.setState({
-            show: false
+        show: !this.state.show
         });
-    } 
-       render(){
+    }
+
+    addInstructions(){
+        var name = $(".recipe-name").val();
+        var instructions = $(".input-2").val();
+
+        this.state.updated.push({title: name, instructions: instructions});
+
+        this.setState({
+            show: false,
+        });
+    }
+
+    render(){
         return (
-        <div>
-           <button onClick={this.showModal}>Add Recipe</button>
-           
-           <Modal show={this.state.show} onHide={this.closeModal}>
-           <Modal.Header>
-               <Modal.Title>Add Recipe:</Modal.Title>
-           </Modal.Header>
-           <Modal.Body>
-               <h2>Name:</h2>
-             <input />
-                <hr />
-           <h3>Instructions</h3>
-             <textarea></textarea>
-           </Modal.Body>
-           <Modal.Footer></Modal.Footer>
-       </Modal>
-        </div>
+      <div>
+        <Button color="info" onClick={this.toggle}>Add Recipe</Button>
+        <Modal isOpen={this.state.show} toggle={this.toggle}>
+           <ModalHeader toggle={this.toggle}>Add a new recipe</ModalHeader>
+           <ModalBody>
+              <h3>Name</h3>
+              <Input className="recipe-name"/>
+              <h3 className="instructions">Instructions</h3>
+              <textarea cols="30" rows="7" className="input-2"></textarea>
+           </ModalBody>
+           <ModalFooter>
+              <Button color="primary" onClick={this.addInstructions}>Add</Button>
+              <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+           </ModalFooter>
+        </Modal>
+        <ShowRecipes recipes={this.state.updated} handleClick={this.toggle}/>
+      </div>
         );
     }
-}
+ }
