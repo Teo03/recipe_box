@@ -25,5 +25,6 @@ module.exports = {
         filename: 'script.min.js',
         path: __dirname + '/build'
     },
+    devtool: 'source-map',
     plugins: [HTMLWebpackPluginConfig]
 };
