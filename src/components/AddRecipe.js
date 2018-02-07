@@ -29,11 +29,17 @@ export class AddRecipe extends React.Component {
         var name = $(".recipe-name").val();
         var instructions = $(".input-2").val();
 
-        this.state.updated.push({title: name, instructions: instructions});
-
-        this.setState({
-            show: false,
-        });
+        if(name === ''){
+            alert('Please enter a name.');
+            this.setState({
+                show: true
+            });
+        } else {
+            this.state.updated.push({title: name, instructions: instructions});
+            this.setState({
+                show: false
+            });
+        }
     }
 
     render(){

@@ -8,24 +8,42 @@ export class ShowRecipes extends React.Component {
             collapse: false
         }
         this.toggle2 = this.toggle2.bind(this);
+        this.cancel = this.cancel.bind(this);
       }
 
-      toggle2() {
-        this.setState({ collapse: !this.state.collapse });
+    toggle2(e) {
+        var id = e.currentTarget.id;
+        id = id.substr(id.length - 1);
+        var recipe = $('#recipe-' + id);
+        $('.recipe-list').not(recipe).hide();
+        
+        this.setState({
+                collapse: !this.state.collapse
+            });
+      }
+
+      cancel(){
+        this.setState({
+            collapse: false
+        });
+        $(".recipes").show();
       }
 
     render(){  
-        var recipeList = this.props.recipes.map(function(recipeInfo, index, e){
+        var recipeList = this.props.recipes.map(function(recipeInfo, index){
             return (
         <div className="recipe-list">
-        <h1 id={recipeInfo.title} onClick={(e) => {this.toggle2(e); e.nativeEvent.stopImmediatePropagation()}}>{recipeInfo.title}</h1>
+        <div className="recipes" id={'recipe-' + index} onClick={this.toggle2}>
+        <h1>{recipeInfo.title}</h1>
         <Collapse isOpen={this.state.collapse}>
           <Card>
             <CardBody>
             {recipeInfo.instructions}
             </CardBody>
+            <Button color="secondary" id='cancel' onClick={this.cancel}>Cancel</Button>
           </Card>
         </Collapse>
+        </div>
         </div>
             );
         }, this);
