@@ -8,7 +8,7 @@ export class Recipes extends React.Component {
             recipes: [
                 {
                     title: 'Pizza',
-                    instructions: 'Add ketchup, mayo etc.'
+                    instructions: "Add ketchup, mayo etc."
                 }
             ]
         }

@@ -11,9 +11,20 @@ export class AddRecipe extends React.Component {
         }
         this.toggle = this.toggle.bind(this);
         this.addInstructions = this.addInstructions.bind(this);
+        this.update = this.update.bind(this);
+    }
+
+    componentWillMount(){
+        localStorage.getItem('updated') && this.setState({
+            updated: JSON.parse(localStorage.getItem('updated')) 
+        });
     }
 
     componentDidMount(){
+        this.update;
+    }
+
+    update(){
         this.setState({
             updated: this.props.recipes
         });
@@ -34,6 +45,7 @@ export class AddRecipe extends React.Component {
             this.setState({
                 show: true
             });
+
         } else {
             this.state.updated.push({title: name, instructions: instructions});
             this.setState({
@@ -44,23 +56,23 @@ export class AddRecipe extends React.Component {
 
     render(){
         return (
-      <div>
-        <Button color="info" onClick={this.toggle}>Add Recipe</Button>
-        <Modal isOpen={this.state.show} toggle={this.toggle}>
-           <ModalHeader toggle={this.toggle}>Add a new recipe</ModalHeader>
-           <ModalBody>
-              <h3>Name</h3>
-              <Input className="recipe-name"/>
-              <h3 className="instructions">Instructions</h3>
-              <textarea cols="30" rows="7" className="input-2"></textarea>
-           </ModalBody>
-           <ModalFooter>
-              <Button color="primary" onClick={this.addInstructions}>Add</Button>
-              <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-           </ModalFooter>
-        </Modal>
-        <ShowRecipes recipes={this.state.updated} handleClick={this.toggle}/>
-      </div>
+        <div>
+            <Button color="info" onClick={this.toggle}>Add Recipe</Button>
+            <Modal isOpen={this.state.show} toggle={this.toggle}>
+                <ModalHeader toggle={this.toggle}>Add a new recipe</ModalHeader>
+                <ModalBody>
+                    <h3>Name</h3>
+                    <Input placeholder="Enter a new name" className="recipe-name"/>
+                    <h3 className="instructions">Instructions</h3>
+                    <textarea cols="30" rows="7" className="input-2"></textarea>
+                </ModalBody>
+                <ModalFooter>
+                    <Button color="primary" onClick={this.addInstructions}>Add</Button>
+                    <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                </ModalFooter>
+            </Modal>
+            <ShowRecipes recipes={this.state.updated} edit={this.toggle} />
+        </div>
         );
     }
  }
