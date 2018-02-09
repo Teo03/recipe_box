@@ -22,6 +22,7 @@ export class AddRecipe extends React.Component {
 
     componentDidMount(){
         this.update;
+        $('#save').hide();
     }
 
     update(){
@@ -57,21 +58,22 @@ export class AddRecipe extends React.Component {
     render(){
         return (
         <div>
-            <Button color="info" onClick={this.toggle}>Add Recipe</Button>
+            <Button color="info" id="add-recipe" className="col-sm-12" onClick={this.toggle}>Add Recipe</Button>
+            <hr />
             <Modal isOpen={this.state.show} toggle={this.toggle}>
                 <ModalHeader toggle={this.toggle}>Add a new recipe</ModalHeader>
                 <ModalBody>
                     <h3>Name</h3>
                     <Input placeholder="Enter a new name" className="recipe-name"/>
                     <h3 className="instructions">Instructions</h3>
-                    <textarea cols="30" rows="7" className="input-2"></textarea>
+                    <textarea placeholder="Ingredients go here.." cols="30" rows="7" className="input-2"></textarea>
                 </ModalBody>
                 <ModalFooter>
                     <Button color="primary" onClick={this.addInstructions}>Add</Button>
                     <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                 </ModalFooter>
             </Modal>
-            <ShowRecipes recipes={this.state.updated} edit={this.toggle} />
+            <ShowRecipes recipes={this.state.updated}/>
         </div>
         );
     }

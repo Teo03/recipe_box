@@ -1,8 +1,60 @@
+* body {
+    background-color: #ddbc95;
+}
+
+.heading {
+    font-size: 60px;
+}
+
+#add-recipe {
+    margin: 0;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    padding: 7px;
+}
+
 .instructions {
     margin-top: 20px;
 }
+
+#instructions {
+    width: 100%;
+    font-size: 30px;
+}
+
+.recipe-name {
+    font-size: 20px;
+}
+
 .input-2 {
     height: 100%;
     width: 100%;
     margin: 0 auto;
+    font-size: 20px;
+}
+
+.recipe-list:hover {
+    background-color: #808080;
+}
+
+.recipe-list {
+    background-color: #B8B8B8;
+    color: #2A3132;
+    text-align: center;
+    border: 2px solid #585858;
+    margin: 4px;
+}
+
+.card {
+    background-color: #C0C0C0;
+}
+
+.card-body {
+    font-size: 25px;
+}
+
+.btns {
+    margin: 0;
+    margin-bottom: 15px;
+    margin-top: 10px;
 }

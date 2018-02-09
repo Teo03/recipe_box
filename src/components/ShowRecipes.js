@@ -8,8 +8,21 @@ export class ShowRecipes extends React.Component {
             collapse: -1
         }
     }
+
     componentWillUpdate(nextProps, nextState){
-        localStorage.setItem('updated', JSON.stringify(nextProps.recipes))
+        localStorage.setItem('updated', JSON.stringify(nextProps.recipes));
+    }
+
+    edit(){
+        var name = 'New ' + $('#title').text();
+        var inst = $('#instructions').val();
+        this.props.recipes.push({title: name, instructions: inst});
+        $('#save').hide();
+
+    }
+
+    handleChange(){
+        $('#save').show();
     }
 
     render() {
@@ -17,19 +30,17 @@ export class ShowRecipes extends React.Component {
             return (
         <div className="recipe-list" key={index}>
         <div className="recipe" id={'recipe-' + index} onClick={() => this.setState({ collapse: index })}>
-        <h1>{recipeInfo.title}</h1>
+        <h1 id="title">{recipeInfo.title}</h1>
             <Collapse isOpen={this.state.collapse === index}>
                 <Card>
                     <CardBody>
-                        {recipeInfo.instructions}
+                        <textarea cols="80" rows="4" onChange={this.handleChange} id="instructions">{recipeInfo.instructions}</textarea>
                     </CardBody>
-                    <div className="col-lg-6">
-                        <div className="col-sm-12">
+                        <div className="col-sm-12 btns">
                         <Button color="secondary" className='col-sm-4' onClick={() => index = -1}>Cancel</Button>
-                        <Button color='info' className='col-sm-4' onClick={this.props.edit}>Edit</Button>
+                        <Button color='success' className='col-sm-4' id="save" onClick={() => this.edit()}>Save</Button>
                         <Button color="danger" className='col-sm-4' onClick={() => this.props.recipes.splice(index, 1)}>Delete</Button>
                         </div>
-                    </div>
                 </Card>
             </Collapse>
             </div>
