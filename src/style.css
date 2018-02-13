@@ -1,5 +1,6 @@
 * body {
     background-color: #ddbc95;
+    font-family: 'Roboto', sans-serif;
 }
 
 .heading {
@@ -8,7 +9,7 @@
 
 #add-recipe {
     margin: 0;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     margin-top: 20px;
     padding: 7px;
 }
@@ -20,6 +21,7 @@
 #instructions {
     width: 100%;
     font-size: 30px;
+    color: #14323e;
 }
 
 .recipe-name {
