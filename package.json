@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
+  "homepage": "https://teo03.github.io/recipe_box",
   "author": "Teodor Bogoeski",
   "license": "ISC",
   "devDependencies": {
@@ -22,6 +25,7 @@
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
+    "gh-pages": "^1.1.0",
     "reactstrap": "^5.0.0-beta"
   }
 }

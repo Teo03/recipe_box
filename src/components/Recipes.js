@@ -49,7 +49,6 @@ export class Recipes extends React.Component {
 
     update() {
         this.setState({recipes: this.state.recipes});
-        window.location.reload(true);
     }
 
     toggle() {
