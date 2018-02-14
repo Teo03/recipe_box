@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import {  Modal, ModalHeader, ModalBody, ModalFooter, Input, Collapse, Button, CardBody, Card } from 'reactstrap';
 
 var timeout = null;
@@ -15,25 +16,44 @@ export class ShowRecipes extends React.Component {
 
     componentWillUpdate(nextProps, nextState){
         localStorage.setItem('recipes', JSON.stringify(nextProps.recipes));
+        this.checkRecipes();
+    }
+    componentDidMount(){
+        this.checkRecipes();
     }
 
-    handleChange(name, e) {
+    checkRecipes(){
+        if(this.props.recipes.length < 1){
+            $('#no-recipes').fadeIn('slow');
+        } else {
+            $('#no-recipes').fadeOut('slow');
+        } 
+    }
+
+   handleChange(name, e) {
         $('.saved').show();
         clearTimeout(timeout);
         this.setState({
             value: e.target.value
         });
         timeout = setTimeout(function() {
+            var index = _.findIndex(this.props.recipes, {
+                title: name
+            });
             this.props.recipes.push({
                 title: name,
                 instructions: this.state.value
             });
-            $('.saved').text('Saved!, please refresh!').fadeOut('slow');
-            this.setState({ collapse: -1 });
-        }.bind(this), 1000);
+            this.props.recipes.splice(index, 1);
+            $('.saved').text('Saved!').fadeOut('slow');
+            this.setState({
+                collapse: -1
+            });
+            //reloading the page because recipes maybe will change their names
+           location.reload();
+        }.bind(this), 2400);
         $('.saved').text('Saving...');
     }
-
     render() {
         var recipeList = this.props.recipes.map(function (recipeInfo, index) {
             return (

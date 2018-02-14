@@ -14,6 +14,11 @@
     padding: 7px;
 }
 
+#no-recipes {
+    display: none;
+    color: rgb(77, 77, 77); 
+}
+
 .instructions {
     margin-top: 20px;
 }

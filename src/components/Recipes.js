@@ -16,12 +16,10 @@ export class Recipes extends React.Component {
             recipes: [
                 {
                     title: 'Pizza',
-                    instructions: "(1/4 ounce) package yeast, 1 cup water, tablespoon oil, 2 1⁄2 cups all-purpose f" +
-                            "lour"
+                    instructions: "Whisk 3 3/4 cups flour and 1 1/2 teaspoons salt. Make a well and add 1 1/3 cups warm water, 1 tablespoon sugar and 1 packet yeast. When foamy, mix in 3 tablespoons olive oil; knead until smooth, 5 minutes. Brush with olive oil, cover in a bowl and let rise until doubled, about 1 hour 30 minutes. Divide into two 1-pound balls. Use 1 pound per recipe unless noted"
                 }, {
-                    title: 'Grilled Mushroom Swiss Burgers',
-                    instructions: "1 1/2 pounds lean ground beef, 1/2 teaspoon seasoned meat tenderizer, salt and p" +
-                            "epper to taste, 2 teaspoons butter etc.."
+                    title: 'Hamburger',
+                    instructions: "2 pounds ground beef, 1 egg, beaten, 3/4 cup dry bread crumbs, 3 tablespoons evaporated milk, 2 tablespoons Worcestershire sauce, 1/8 teaspoon cayenne pepper, 2 cloves garlic, minced"
                 }
             ],
             show: false
@@ -43,7 +41,7 @@ export class Recipes extends React.Component {
         });
     }
 
-    componentDidMount() {
+    componentDidMount() {    
         this.update;
     }
 
@@ -75,14 +73,15 @@ export class Recipes extends React.Component {
 
     render() {
         return (
-            <div>
-                <div>
+        <div>
+               <div>
                     <Button
                         color="info"
                         id="add-recipe"
                         className="col-sm-12"
                         onClick={this.toggle}>Add Recipe</Button>
                     <hr/>
+                    <h3 id="no-recipes">No recipes to show, add by clicking the above button.</h3>
                     <Modal isOpen={this.state.show} toggle={this.toggle}>
                         <ModalHeader toggle={this.toggle}>Add a new recipe</ModalHeader>
                         <ModalBody>
@@ -96,7 +95,7 @@ export class Recipes extends React.Component {
                             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                         </ModalFooter>
                     </Modal>
-                    <ShowRecipes recipes={this.state.recipes} update={this.update}/>
+                     <ShowRecipes recipes={this.state.recipes} update={this.update}/>
                 </div>
             </div>
         );
