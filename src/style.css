@@ -18,6 +18,13 @@
     margin-top: 20px;
 }
 
+#title {
+    cursor: pointer;
+}
+.saved {
+    display: none;
+}
+
 #instructions {
     width: 100%;
     font-size: 30px;
