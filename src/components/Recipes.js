@@ -95,7 +95,7 @@ export class Recipes extends React.Component {
                             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                         </ModalFooter>
                     </Modal>
-                     <ShowRecipes recipes={this.state.recipes} update={this.update}/>
+                     <ShowRecipes recipes={this.state.recipes}/>
                 </div>
             </div>
         );

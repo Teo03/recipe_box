@@ -18,6 +18,7 @@ export class ShowRecipes extends React.Component {
         localStorage.setItem('recipes', JSON.stringify(nextProps.recipes));
         this.checkRecipes();
     }
+
     componentDidMount(){
         this.checkRecipes();
     }
@@ -28,6 +29,11 @@ export class ShowRecipes extends React.Component {
         } else {
             $('#no-recipes').fadeOut('slow');
         } 
+    }
+
+    delete(index){
+        this.props.recipes.splice(index, 1);
+        location.reload();
     }
 
    handleChange(name, e) {
@@ -49,11 +55,11 @@ export class ShowRecipes extends React.Component {
             this.setState({
                 collapse: -1
             });
-            //reloading the page because recipes maybe will change their names
            location.reload();
         }.bind(this), 2400);
         $('.saved').text('Saving...');
     }
+
     render() {
         var recipeList = this.props.recipes.map(function (recipeInfo, index) {
             return (
@@ -68,7 +74,7 @@ export class ShowRecipes extends React.Component {
                         <div className="col-sm-12 btns">
                         <Button color="secondary" className='col-sm-4' onClick={() => index = -1}>Cancel</Button>
                         <Button color="success" className='col-sm-4 saved'>Saving...</Button>
-                        <Button color="danger" className='col-sm-4' onClick={() => this.props.recipes.splice(index, 1)}>Delete</Button>
+                        <Button color="danger" className='col-sm-4' onClick={() => this.delete(index)}>Delete</Button>
                         </div>
                 </Card>
             </Collapse>

@@ -14,6 +14,10 @@
     padding: 7px;
 }
 
+.recipe:hover {
+    cursor: pointer;
+}
+
 #no-recipes {
     display: none;
     color: rgb(77, 77, 77); 
